@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="edge"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title></title>
+    <link rel="stylesheet" href="../static/reset.css"/>
+    <style type="text/css">
+        .text_highlight{color: #f40}
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <h1>倒计时</h1>
+
+    <div class="pb20">
+        <h3>例子1</h3>
+        <p class="f_s_14 text_gray_6 mb10">默认倒计时</p>
+
+        <div class="clearfix">
+            <div class="fl">
+                距离提升截止时间还剩：
+                <span id="time_count_down"></span>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="code_box">
+        <pre class="brush: js;">
+            new $.IC.TimeCountDown("#time_count_down", {
+                startDate: "2012/11/12,15:00:00",//开始时间
+                endDate: "2012/11/12,16:30:00", //结束时间
+                textHighlight: "text_highlight f_w_7 f_s_16",//高亮
+                done: function () {//结束后回调
+                    console.log("结束");
+                }
+            });
+        </pre>
+    </div>
+</div>
+<script type="text/javascript" src="../static/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../static/shBrushJScript/shcore.js"></script>
+<script type="text/javascript" src="../static/shBrushJScript/shBrushJScript.js"></script>
+<script type="text/javascript" src="time_count_down.js"></script>
+<script type="text/javascript">
+    SyntaxHighlighter.all();
+    $(function () {
+        var oWrap = $("#time_count_down");
+        new $.IC.TimeCountDown(oWrap, {
+            startDate: "2012/11/12,16:29:50",
+            endDate: "2012/11/12,16:30:00",
+            textHighlight: "text_highlight f_w_7 f_s_16",
+            done: function () {
+                console.log("结束")
+            }
+        });
+    })
+</script>
+</body>
+</html>
