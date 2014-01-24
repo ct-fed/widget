@@ -60,7 +60,6 @@
 
                 if (isNaN(lineHeight) || lineHeight === 0) {
                     var targetType = target[0].type;
-                    console.log(targetType)
                     if (targetType == "text") {
                         lineHeight = height;
                     } else if (targetType == "textarea") {
