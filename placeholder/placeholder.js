@@ -20,7 +20,7 @@
                 var target = o.target,
                     id = target[0].id;
                 if (id === undefined) {
-                    //id = 'placeholder_' + ( +new Date() ) + ( Math.random() + '' ).slice(-8);
+                    id = 'placeholder_' + ( +new Date() ) + ( Math.random() + '' ).slice(-8);
                     target.id = id;
                 }
 
@@ -31,20 +31,23 @@
                 operation.bindKeyup(o);
             },
             createLabel: function (o, id) {
+                var target = o.target;
+                target.wrap("<div style='*zoom:1;position:relative;'></div>")
                 o.label = $('<label for="' + id + '">' + o.text + '</label>');
+                target.parent().append(o.label);
                 operation.setLabelStyle(o);
-                o.label.appendTo(o.target[0].ownerDocument.body);
+
                 o.label.on('click',function () {
                     o.target.focus();
                 }).on("selectstart", function () {
                         return false;
-                })
+                    })
             },
             setLabelStyle: function (o) {
                 var target = o.target,
                     width = target.width(),
                     height = parseInt(target.css("height"), 10),
-                    offset = target.offset(),
+                    position = target.position(),
                     paddingLeft = parseInt(target.css("paddingLeft"), 10),
                     paddingRight = parseInt(target.css("paddingRight"), 10),
                     paddingTop = parseInt(target.css("paddingTop"), 10),
@@ -53,16 +56,27 @@
                     borderTopWidth = parseInt(target.css("borderTopWidth"), 10),
                     borderBottomWidth = parseInt(target.css("borderBottomWidth"), 10),
                     borderRightWidth = parseInt(target.css("borderRightWidth"), 10),
-                    lineHeight = target[0].type === "textarea" ? 22 : height;
+                    lineHeight = parseInt(target.css("line-height"), 10);
+
+                if (isNaN(lineHeight) || lineHeight === 0) {
+                    var targetType = target[0].type;
+                    console.log(targetType)
+                    if (targetType == "text") {
+                        lineHeight = height;
+                    } else if (targetType == "textarea") {
+                        lineHeight = 22;
+                    }
+                }
                 o.visible = target[0].value === "";
+
                 o.label.css({
                     width: width,
                     height: height,
                     lineHeight: lineHeight + "px",
                     position: "absolute",
                     padding: (paddingTop + borderTopWidth) + "px " + (paddingRight + borderRightWidth) + "px " + (paddingBottom + borderBottomWidth) + "px " + (paddingLeft + borderLeftWidth) + "px",
-                    left: offset.left,
-                    top: offset.top,
+                    left: position.left,
+                    top: position.top,
                     cursor: 'text',
                     display: o.visible ? 'block' : 'none'
                 })

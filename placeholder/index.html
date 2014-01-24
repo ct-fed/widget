@@ -43,6 +43,12 @@
         </pre>
     </div>
     <div class="pb20">
+        <h3>例子1</h3>
+        <p class="f_s_14 text_gray_6 mb10">输入框占位效果</p>
+        <label for="userName1">用户名：</label>
+        <input type="text" id="userName1" class="filed" value=""/>
+    </div>
+    <div class="pb20">
         <h3>例子2</h3>
         <p class="f_s_14 text_gray_6 mb10">textarea占位效果</p>
         <textarea id="textarea" class="filed"></textarea>
@@ -53,6 +59,9 @@
     </div>
     <div class="code_box">
         <pre class="brush: js;">
+            var text = new $.IC.PlaceHolder('#textarea',{
+                text: "请输入您的用户名"
+            });
             var text = new $.IC.PlaceHolder('#textarea',{
                 text: "请输入您的用户名"
             });
@@ -77,6 +86,9 @@
     $(function () {
         var text = new $.IC.PlaceHolder('#userName', {
             text: "请输入您的用户名"
+        });
+        var text1 = new $.IC.PlaceHolder('#userName1', {
+            text: "测试测试"
         });
         var textarea = new $.IC.PlaceHolder('#textarea', {
             text: "来说两句吧，让大家为我加油"

@@ -97,20 +97,26 @@
             done: function (o) {
                 var doneFn = typeof o.done === "function" && o.done;
                 if (o.timer) {
-                    clearInterval(o.timer);
+                    clearTimeout(o.timer);
                     o.timer = null;
                     doneFn();
                 }
             }
+        },
+        isDate = function (str) {
+            var reg = /^(\d{4})(\/(\d{2}))\2(\s|((,|\s)(\d{2}):(\d{1,2}):(\d{1,2})))$/;
         };
 
+
     var TimeCountDown = function (target, options) {
+
         var startDate = new Date(options.startDate),
             endDate = new Date(options.endDate),
             OBJECT = Object.prototype.toString,
             target = $(target).eq(0);
         if (!target)  return;
 
+        console.log(OBJECT.call(startDate))
         if (OBJECT.call(startDate) !== "[object Date]" || OBJECT.call(endDate) !== "[object Date]") return;
 
         startDate = +new Date(startDate);
@@ -132,9 +138,9 @@
             this._o = null;
             delete this._o;
         },
-        enable: function(){
-             var o = this._o;
-            if(!o) return;
+        enable: function () {
+            var o = this._o;
+            if (!o) return;
             countDown.init(o);
         }
     };
