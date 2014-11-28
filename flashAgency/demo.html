@@ -27,19 +27,16 @@
         console.log("连接完成，等到响应");
     } ;
     var id = new Date().getTime();
-    $.flashAgency.initConfig({
+
+    $.flashAgency({
         swfId: "testSwf",
         loadSwfId: "load_flash",
-        onConnect: function () {   //初始化连接flash成功回调
-            $.flashAgency.send({
-                url: url,
-                type: "POST",
-                param: param,
-                onComplete: handler.success,
-                onSuccess: handler.complete,
-                onError: handler.fault
-            });
-        }
+        url: url,
+        type: "post",
+        param: param,
+        onComplete: handler.success,
+        onSuccess: handler.complete,
+        onError: handler.fault
     });
 </script>
 </body>
