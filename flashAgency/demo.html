@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <title></title>
+
+</head>
+<body>
+<div id="load_flash"></div>
+
+<script src="http://cdn.staticfile.org/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.flashAgency.js"></script>
+<script type="text/javascript">
+    var url = "http://discuss1.tc108.org:1202/test/a.aspx";
+    var param = {top: 50};
+    var handler = {};
+    handler.success = function (data) {
+        console.log("我是请求1", data);
+    };
+    handler.fault = function () {
+        console.log("s失败回调");
+    };
+    handler.complete = function(){
+        console.log("连接完成，等到响应");
+    } ;
+    var id = new Date().getTime();
+    $.flashAgency.initConfig({
+        swfId: "testSwf",
+        loadSwfId: "load_flash",
+        onConnect: function () {   //初始化连接flash成功回调
+            $.flashAgency.send({
+                url: url,
+                type: "POST",
+                param: param,
+                onComplete: handler.success,
+                onSuccess: handler.complete,
+                onError: handler.fault
+            });
+        }
+    });
+</script>
+</body>
+</html>
